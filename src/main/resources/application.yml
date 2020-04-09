@@ -1,0 +1,7 @@
+server:
+  port: 8099
+
+
+logging:
+  level:
+    root: info
