@@ -5,8 +5,14 @@
 2、jdk-jws开发
 注：主要在发布方式上使用的包及其实现方式
 ```
+二、项目包
+soap - cxf/jws
+其中cxf的hello范例是使用标准的soap+xml格式；
+其余的是返回字符串。
 
-二、使用jdk-jws和cxf框架开发（服务端）的区别（区别在发布使用的类上）：
+restful按照http+json格式
+
+三、使用jdk-jws和cxf框架开发（服务端）的区别（区别在发布使用的类上）：
 ```
 1、关于服务端接口和接口实现类没有区别，具体可看HiCxfServiceImpl，经验证@WebService注解的两种书写方式都没问题，关键在于发布Endpoint上，使用的是哪个包的Endpoint：
 根据示例可看出：
@@ -28,7 +34,7 @@ http://localhost:8088/service/helloJwsService?wsdl
 ```
 前两段使用的是soap协议。
 
-三、ws的分类：soap ws和restful ws
+四、ws的分类：soap ws和restful ws
 ```
 restful 风格像controller风格注解，主要是http+json
 soap需要使用一些注解，主要是http+xml
