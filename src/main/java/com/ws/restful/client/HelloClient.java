@@ -1,39 +1,56 @@
 package com.ws.restful.client;
 
-import com.alibaba.fastjson.JSONObject;
-import com.sun.jersey.api.client.WebResource;
+import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
+
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HelloClient {
+
     public static void main(String[] args) {
-//        Client client = ClientFactory.newClient();
-//        WebTarget target = client.target("http://localhost:8099/HelloService/hello");
-        Hello hello = new Hello();
-        hello.setHello("hello");
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("hello", "hello");
-//        Entity entity = Entity.entity(hello, MediaType.APPLICATION_JSON_TYPE);
-//        Response post = target.request().post(entity);
-//        System.out.println(post.getStatus());
-        com.sun.jersey.api.client.Client client = com.sun.jersey.api.client.Client.create();
-        WebResource resource = client.resource("http://localhost:8011/helloService/hi/hi");
-        String s = resource.get(String.class);
-        System.out.println(s);
-//        WebResource resource = client.resource("http://localhost:8011/helloService/hello");
-//        String post = resource.entity(jsonObject, MediaType.APPLICATION_JSON_TYPE).post(String.class);
-//        System.out.println(post);
+        String baseAddress = "http://localhost:8011/ws/rest";
+
+        List<Object> providerList = new ArrayList<Object>();
+        providerList.add(new JacksonJsonProvider());
+
+
+        //JSR 1.1及以下，未验证
+//        HelloService helloService = JAXRSClientFactory.create(baseAddress, HelloService.class, providerList);
+//        Response hello = helloService.hello("hello");
+//        System.out.println(hello);
+//
+//        Response hi = helloService.hi("1");
+//        System.out.println(hi);
+//
+//        Response query = helloService.query("1");
+//        System.out.println(query);
+
+
+        //JSR 2.2以上
+
+//        Response response = ClientBuilder.newClient().register(providerList)
+//                .target(baseAddress).path("/hi/1")
+//                .request(MediaType.APPLICATION_JSON).get();
+//        System.out.println(response.getStatus());
+//        System.out.println(response.getEntity());
+
+        com.ws.restful.server.model.Response response1 = new com.ws.restful.server.model.Response();
+        response1.setSessionId("1");
+        response1.setMessage("www");
+        response1.setCode("1");
+        response1.setId("11");
+        Entity entity = Entity.entity(response1, MediaType.APPLICATION_JSON);
+        Response post = ClientBuilder.newClient().register(providerList)
+                .target(baseAddress).path("/hello")
+                .request(MediaType.APPLICATION_JSON).post(entity);
+        System.out.println(post.getStatus());
+
     }
 
 
 
-}
-class Hello {
-    private String hello;
-
-    public String getHello() {
-        return hello;
-    }
-
-    public void setHello(String hello) {
-        this.hello = hello;
-    }
 }
