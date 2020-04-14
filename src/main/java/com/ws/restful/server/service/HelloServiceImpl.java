@@ -1,48 +1,37 @@
 package com.ws.restful.server.service;
 
-import com.alibaba.fastjson.JSONPObject;
-import com.ws.restful.server.model.Response;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class HelloServiceImpl implements HelloService {
 
 
     @Override
-    public void hello(String data) {
+    public javax.ws.rs.core.Response hello(String data) {
         System.out.println("receive client data: " + data);
-//        Response response = new Response();
-//        response.setId("1");
-//        response.setCode("123");
-//        response.setMessage("success");
-//        response.setSessionId("11111");
-//        List list = new ArrayList();
-//        list.add(response);
-//        return null;
+        return javax.ws.rs.core.Response.ok(reponse()).build();
     }
 
     @Override
-    public Response hi(String id) {
+    public javax.ws.rs.core.Response test() {
+        System.out.println("client post");
+        return javax.ws.rs.core.Response.ok(reponse()).build();
+    }
+
+    @Override
+    public javax.ws.rs.core.Response hi(String id) {
         System.out.println("receive client request:" + id);
-        Response response = new Response();
-        response.setId("1");
-        response.setCode("123");
-        response.setMessage("success");
-        response.setSessionId("11111");
-        List<Response> list = new ArrayList<>();
-        list.add(response);
-//        JSONPObject jsonpObject = new JSONPObject("ok", list);
-        return response;
+        return javax.ws.rs.core.Response.ok(reponse()).build();
     }
 
     @Override
-    public Response query(String name) {
-        Response response = new Response();
-        response.setId("1");
-        response.setCode("123");
-        response.setMessage("success");
-        response.setSessionId("11111");
+    public javax.ws.rs.core.Response query(String name) {
+        return javax.ws.rs.core.Response.ok(reponse()).build();
+    }
+
+    private com.ws.restful.server.model.Response reponse() {
+        com.ws.restful.server.model.Response response = new com.ws.restful.server.model.Response();
+        response.setSessionId("1");
+        response.setMessage("www");
+        response.setCode("1");
+        response.setId("11");
         return response;
     }
 

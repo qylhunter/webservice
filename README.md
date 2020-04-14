@@ -1,9 +1,14 @@
 ###webservice example
 一、demo内容
 ```
+soap
 1、cxf框架开发
 2、jdk-jws开发
 注：主要在发布方式上使用的包及其实现方式
+
+restful
+1、restful ws开发
+
 ```
 二、项目包
 ```
